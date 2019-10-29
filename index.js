@@ -1,12 +1,20 @@
 function renderStartWindow() {
     console.log(`'renderStartWindow' ran`);
-    /*this function will display the the first window users will see when landing on the page.
-    it will include a title and a start button.*/
+    /*
+    this function will display the the first window users will see when landing on the page.
+    it will include a title and a start button.
+    
+    find the h1 tag and insert the title;
+    find the button element with class="start-button" and insert 'Start quiz';
+    */
+    $('.start-title').text('Test your knowledge about SpaceX');
+    $('.start-button-div').append('<button class="start-button">Start quiz</button>');
 };
 
 function handleQuestionAnsRendering() {
     console.log(`'handleQuestionsansRendering' ran`);
-    /*this function will dispay one question at a time with its answers
+    /*
+    this function will dispay one question at a time with its answers
     the first question and its answers will be displayed when the user clicks the start button
     then each following question and asnwers will be displyed when the user clickes next
     but the user will only see the next button after clicking submit
