@@ -17,8 +17,13 @@ h1 {
     margin-top: 75px;
     text-align: center;
 }
+.start-button {
+    display: flex;
+    justify-content: center;
+}
 .button{
     font-size: 20px;
+    width: 100%;
 }
 .form {
     text-align: start;
@@ -31,4 +36,32 @@ h1 {
     width: 100%;
     display: block;
     text-align: center;
+}
+.next-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+
+}
+
+.response {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.response-correct, .wrong, .the-correct-asw {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+.response-correct {
+    color: green;
+}
+.wrong {
+    color: red;
+}
+.final-window {
+    display: flex;
+   flex-direction: column;
+   align-items: center;
 }
