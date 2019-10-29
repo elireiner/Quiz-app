@@ -1,0 +1,34 @@
+* {
+    box-sizing: border-box;
+}
+.track {
+    display: flex;
+    margin-right: 5px;
+    margin-left: 5px;
+    justify-content: space-between;
+}
+.correct{
+    align-self: flex-start;
+}
+.remaining {
+    align-self: flex-end;
+}
+h1 {
+    margin-top: 75px;
+    text-align: center;
+}
+.button{
+    font-size: 20px;
+}
+.form {
+    text-align: start;
+}
+.fieldset {
+    border: 0;
+}
+.submit-button {
+    margin: auto;
+    width: 100%;
+    display: block;
+    text-align: center;
+}

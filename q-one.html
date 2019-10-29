@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <p>0/5 correct</p>
-    <p>Four questions remaning</p>
-    <form action="">
-        <fieldset>
+    <div class="track">
+        <p class="correct">0/5 correct</p>
+        <p class="remaining">Four questions remaning</p>
+    </div>
+
+    <form action="" class="form">
+        <fieldset class="fieldset">
             <legend class="question">How many times did SpaceX try to reach orbit and failed before succeeding their
                 first time?</legend>
             <input type="radio" name="SpaceX" id="ans-1" value="0">
@@ -28,8 +32,11 @@
             <input type="radio" name="SpaceX" id="ans-4" value="3">
             <label for="ans-4">5; they succeeded their sixth time.</label>
         </fieldset>
-        <button type="submit">Submit</button>
+        <div class="submit-button">
+            <button type="submit" class="submit">Submit</button>
+        </div>
     </form>
 </body>
 <button type="submit">Next</button>
+
 </html>
