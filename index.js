@@ -61,7 +61,7 @@ function renderStartWindow() {
     find the button element with class="start-button" and insert 'Start quiz';
     */
 
-    $('.body').prepend(
+    $('.windows').prepend(
         `<header>
             <h1 class="start-title">How much do you know about SpaceX?</h1>
         </header>
@@ -75,6 +75,10 @@ function keepTrack() {
     
     each time this function is called the value of 'i' wil be increased by one.*/
     i++
+};
+
+function removeUnwantedCode(){
+    $('.windows').empty();
 };
 function resetTracker() {
     /*this function will reset the value of 'i' to 0*/
@@ -113,6 +117,8 @@ function returnCode(item) {
             </div>`;
 };
 
+
+
 function handleQuestionAnsRendering() {
     console.log(`'handleQuestionsansRendering' ran`);
     /*
@@ -124,8 +130,9 @@ function handleQuestionAnsRendering() {
     
     find the form element and when the user clicks 'start quiz' insert the question, aswers, and submit button*/
 
-    $('body').on('click', '.start-button', function (event) {
-        $('body').prepend(returnCode(STORE[i]));
+    $('.body').on('click', '.start-button', function (event) {
+        removeUnwantedCode()
+        $('.windows').prepend(returnCode(STORE[i]));
 
         keepTrack(); //this will increase 'i' by one and thereby insureing that this render is kept track of.
     });
