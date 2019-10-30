@@ -43,17 +43,14 @@ const STORE = [
     {
         id: cuid(),
         question: 'When was the first time SpaceX launched a satellite to geostationary orbit?',
-        correct: 'In December 2013.',
+        answer1: 'In December 2013.',
         answer2: 'In March 2011.',
         answer3: 'In November 2010.',
         answer4: 'In June 2009',
         correct: 'In December 2013.'
     }
 ]
-
 let i = 0;
-
-
 function renderStartWindow() {
     console.log(`'renderStartWindow' ran`);
     /*
@@ -63,43 +60,59 @@ function renderStartWindow() {
     find the h1 tag and insert the title;
     find the button element with class="start-button" and insert 'Start quiz';
     */
-    ('.start-title').text('Test your knowledge about SpaceX');
-    ('.start-button-div').append('<button class="start-button">Start quiz</button>');
+
+    $('.body').prepend(
+        `<header>
+            <h1 class="start-title">How much do you know about SpaceX?</h1>
+        </header>
+        <div class="start-button-div">
+        <button class="start-button">Start quiz</button>
+        </div>`);
 };
 
-
-function keepTrack(){
+function keepTrack() {
     /*this function will keep track of how many qustions were displayed
     
     each time this function is called the value of 'i' wil be increased by one.*/
     i++
-    //console.log(i);
+};
+function resetTracker() {
+    /*this function will reset the value of 'i' to 0*/
+
+    i = 0;
+    console.log(i);
 };
 
-function returnCode(){
+function returnCode(item) {
     /*this function will return the code needed for the first window
     
     */
-   return `<fieldset class="fieldset">
-   <legend class="question">{}</legend>
-   <input type="radio" name="SpaceX" id="ans-1" value="0">
-   <label for="ans-1">{}</label>
-   <br>
-   <input type="radio" name="SpaceX" id="ans-2" value="1">
-   <label for="ans-2">{}</label>
-   <br>
-   <input type="radio" name="SpaceX" id="ans-3" value="2">
-   <label for="ans-3">{}</label>
-   <br>
-   <input type="radio" name="SpaceX" id="ans-4" value="3">
-   <label for="ans-4">{}</label>
-</fieldset>
+    return `<div class="track">
+                <p class="correct"></p>
+                <p class="remaining"></p>
+            </div>
+            <form action="" class="form">
+                <fieldset class="fieldset">
+                    <legend class="question">${item.question}</legend>
+                    <input type="radio" name="SpaceX" id="ans-1" value="0">
+                    <label for="ans-1">${item.answer1}</label>
+                    <br>
+                    <input type="radio" name="SpaceX" id="ans-2" value="1">
+                    <label for="ans-2">${item.answer2}</label>
+                    <br>
+                    <input type="radio" name="SpaceX" id="ans-3" value="2">
+                    <label for="ans-3">${item.answer3}</label>
+                    <br>
+                    <input type="radio" name="SpaceX" id="ans-4" value="3">
+                    <label for="ans-4">${item.answer4}</label>
+                    </fieldset>
+            </form>
 
+            <div class="submit-button">
+                <button type="submit" class="submit">Submit</button>
+            </div>`;
+};
 
-<div class="submit-button">
-   <button type="submit" class="submit"></button>
-</div>`;
-}
 function handleQuestionAnsRendering() {
     console.log(`'handleQuestionsansRendering' ran`);
     /*
@@ -110,6 +123,13 @@ function handleQuestionAnsRendering() {
     **important** when the user clicks submit the submit button needs to be cleared from the display
     
     find the form element and when the user clicks 'start quiz' insert the question, aswers, and submit button*/
+
+    $('body').on('click', '.start-button', function (event) {
+        $('body').prepend(returnCode(STORE[i]));
+
+        keepTrack(); //this will increase 'i' by one and thereby insureing that this render is kept track of.
+    });
+
 };
 
 function handleCorrect() {
@@ -150,4 +170,4 @@ function handleQuizApp() {
     handleFinishWindow();
 }
 
-(handleQuizApp);
+$(handleQuizApp);
