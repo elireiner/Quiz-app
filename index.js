@@ -191,7 +191,6 @@ function handleFinishWindow() {
 function handleNext() {
         $('.windows').on('click', '.next', function () {
             keepTrack()
-            console.log(i);
             removeUnwantedCode()
             if (i < 5) {
             $('.windows').append(returnCode(STORE[i]));
@@ -206,7 +205,12 @@ function handleNext() {
     }
 
 function handleRetake(){
+    $('.windows').on('click', '.retake', function (){
+        removeUnwantedCode()
+        resetTracker()
+        $('.windows').append(returnCode(STORE[i]));
 
+    })
 }
     function handleQuizApp() {
         renderStartWindow();
