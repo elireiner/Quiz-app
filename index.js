@@ -51,6 +51,7 @@ const STORE = [
     }
 ]
 let i = 0;
+let h = 0;
 function renderStartWindow() {
     console.log(`'renderStartWindow' ran`);
     /*
@@ -93,9 +94,9 @@ function handleNumCorrect() {
     /* the function will tell the user how may questions they go correct so far*/
 };
 
-function handleNumRemaing() {
-    console.log(`'handleNumRemaing' ran`);
-    /* this function will let the user know how many question still remain*/
+function returnRemaing() {
+    /* this function will return how many question remain*/
+    return i + 1;
 };
 
 function returnCode(item) {
@@ -103,8 +104,8 @@ function returnCode(item) {
     
     */
     return `<div class="track">
-                <p class="correct"></p>
-                <p class="remaining"></p>
+                <p class="correct">You answered ${h}/5 questions correct.</p>
+                <p class="remaining">This is question ${returnRemaing()}/5.</p>
             </div>
             <form class="form">
                 <fieldset class="fieldset">
@@ -165,6 +166,8 @@ function returnEvalCode() {
     /* this function should return if the checked aswer if equel to the correct aswer.
     to do so, this function will compare the answer clicked on and submitted with the correct answer*/
     if (returnChecked() === returnCorrect(STORE[i])) {
+        h++;
+        $('.correct').empty().append(`You answered ${h}/5 questions correct.`)
         return `<p>Correct!</p>
                 <button class="next">Next</button>`
     }
@@ -177,8 +180,14 @@ function returnEvalCode() {
 
 function handelSubmit() {
     $('.body').on('click', '.submit', function () {
-        $('.submit-button').remove();
-        $('.windows').append(returnEvalCode());
+        if ($(`.form input[type="radio"]:checked`).length){
+            $('.submit-button').remove();
+            $('.windows').append(returnEvalCode());
+        }
+        else {
+            $('.submit-button').empty().append(`<button type="submit" class="submit">Submit</button>
+                                                <p>Please select an answer.</p>`)
+        }
     });
 }
 
@@ -197,7 +206,7 @@ function handleNext() {
             }
             else {
                 $('.windows').append(`<div class="final-window">
-                                        <p>Your SpaceX IQ score is: ${5/5}</p>
+                                        <p>Your SpaceX IQ score is: ${h}/5</p>
                                         <button class="retake">Retake</button>
                                     </div`)
             }
@@ -208,6 +217,7 @@ function handleRetake(){
     $('.windows').on('click', '.retake', function (){
         removeUnwantedCode()
         resetTracker()
+        h = 0;
         $('.windows').append(returnCode(STORE[i]));
 
     })
@@ -216,8 +226,6 @@ function handleRetake(){
         renderStartWindow();
         handleStart();
         handelSubmit();
-        handleNumRemaing();
-        handleNumCorrect();
         handleNext();
         handleRetake();
     }
