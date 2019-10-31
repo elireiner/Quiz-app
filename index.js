@@ -53,15 +53,6 @@ const STORE = [
 let i = 0;
 let h = 0;
 function renderStartWindow() {
-    console.log(`'renderStartWindow' ran`);
-    /*
-    this function will display the first window users will see when landing on the page.
-    it will include a title and a start button.
-    
-    find the h1 tag and insert the title;
-    find the button element with class="start-button" and insert 'Start quiz';
-    */
-
     $('.windows').prepend(
         `<header>
             <h1 class="start-title">How much do you know about SpaceX?</h1>
@@ -71,41 +62,14 @@ function renderStartWindow() {
         </div>`);
 };
 
-function keepTrack() {
-    /*this function will keep track of how many qustions were displayed
-    
-    each time this function is called the value of 'i' wil be increased by one.*/
-    i++
-};
-
-function resetTracker() {
-    /*this function will reset the value of 'i' to 0*/
-
-    i = 0;
-    console.log(i);
-};
-
 function removeUnwantedCode() {
     $('.windows').empty();
 };
 
-function handleNumCorrect() {
-    console.log(`'handleNumCorrect' ran`);
-    /* the function will tell the user how may questions they go correct so far*/
-};
-
-function returnRemaing() {
-    /* this function will return how many question remain*/
-    return i + 1;
-};
-
 function returnCode(item) {
-    /*this function will return the code needed for the first window
-    
-    */
     return `<div class="track">
                 <p class="correct">You answered ${h}/5 questions correct.</p>
-                <p class="remaining">This is question ${returnRemaing()}/5.</p>
+                <p class="remaining">This is question ${i + 1}/5.</p>
             </div>
             <form class="form">
                 <fieldset class="fieldset">
@@ -130,41 +94,21 @@ function returnCode(item) {
 };
 
 function handleStart() {
-    console.log(`'handleStart' ran`);
-    /*
-    this function will dispay one question at a time with its answers
-    the first question and its answers will be displayed when the user clicks the start button
-    then each following question and asnwers will be displyed when the user clickes next
-    but the user will only see the next button after clicking submit
-    **important** when the user clicks submit the submit button needs to be cleared from the display
-    
-    find the form element and when the user clicks 'start quiz' insert the question, aswers, and submit button*/
-
     $('.body').on('click', '.start-button', function (event) {
         removeUnwantedCode()
         $('.windows').append(returnCode(STORE[i]));
     });
-
 };
 
 function returnChecked() {
-    /*this function will return the answer that was selceted when the user clicks submit
-    
-    find the brodest div element, on click of the submit button run:
-        return: find answer selected, get its text
-    */
     return $('input[name="SpaceX"]:checked', '.form').next().text();
 }
 
 function returnCorrect(item) {
-    /*his function will retrn the correct answer*/
     return item.correct;
 }
 
 function returnEvalCode() {
-    console.log(`'returnIfCorrect' ran`);
-    /* this function should return if the checked aswer if equel to the correct aswer.
-    to do so, this function will compare the answer clicked on and submitted with the correct answer*/
     if (returnChecked() === returnCorrect(STORE[i])) {
         h++;
         $('.correct').empty().append(`You answered ${h}/5 questions correct.`)
@@ -191,15 +135,9 @@ function handelSubmit() {
     });
 }
 
-function handleFinishWindow() {
-    console.log(`'handleFinishWindow' ran`);
-    /* after the last question was submitted, when the user clicks next, this function will display
-    the final window which includes the final score and a button to retake the quiz */
-};
-
 function handleNext() {
         $('.windows').on('click', '.next', function () {
-            keepTrack()
+            i++;
             removeUnwantedCode()
             if (i < 5) {
             $('.windows').append(returnCode(STORE[i]));
@@ -216,7 +154,7 @@ function handleNext() {
 function handleRetake(){
     $('.windows').on('click', '.retake', function (){
         removeUnwantedCode()
-        resetTracker()
+        i = 0;
         h = 0;
         $('.windows').append(returnCode(STORE[i]));
 
