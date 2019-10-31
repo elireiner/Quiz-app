@@ -128,6 +128,8 @@ function returnCode(item) {
             </div>`;
 };
 
+
+
 function handleStart() {
     console.log(`'handleStart' ran`);
     /*
@@ -141,7 +143,7 @@ function handleStart() {
 
     $('.body').on('click', '.start-button', function (event) {
         removeUnwantedCode()
-        $('.windows').prepend(returnCode(STORE[i]));
+        $('.windows').append(returnCode(STORE[i]));
     });
 
 };
@@ -152,10 +154,10 @@ function returnChecked() {
     find the brodest div element, on click of the submit button run:
         return: find answer selected, get its text
     */
-   return $('input[name="SpaceX"]:checked', '.form').next().text();
+    return $('input[name="SpaceX"]:checked', '.form').next().text();
 }
 
-function returnCorrect(item){
+function returnCorrect(item) {
     /*his function will retrn the correct answer*/
     return item.correct;
 }
@@ -164,14 +166,14 @@ function returnEvalCode() {
     console.log(`'returnIfCorrect' ran`);
     /* this function should return if the checked aswer if equel to the correct aswer.
     to do so, this function will compare the answer clicked on and submitted with the correct answer*/
-    if (returnChecked() === returnCorrect(STORE[i])){
+    if (returnChecked() === returnCorrect(STORE[i])) {
         return `<p>Correct!</p>
-                <button>Next</button>`
+                <button class="next">Next</button>`
     }
     else {
         return `<p>This response was wrong...</p>
-        <p>The correct andwer is: "${returnCorrect(STORE[i])}".</p>
-        <button>Next</button>`
+        <p>The correct answer is: "${returnCorrect(STORE[i])}".</p>
+        <button class="next">Next</button>`
     }
 };
 
@@ -180,28 +182,38 @@ function handelSubmit() {
         $('.submit-button').remove();
         /* call a function that will return whether answer correct and next button
         */
-       $('.windows').append(returnEvalCode());
+        $('.windows').append(returnEvalCode());
     });
 }
 
-function handleNextButtonToQuestion() {
-    /* this function will return the next question*/
-    //keepTrack()
-}
 function handleFinishWindow() {
     console.log(`'handleFinishWindow' ran`);
     /* after the last question was submitted, when the user clicks next, this function will display
     the final window which includes the final score and a button to retake the quiz */
 };
 
-function handleQuizApp() {
-    renderStartWindow();
-    handleStart();
-    handelSubmit()
-    handleNumRemaing();
-    handleNumCorrect();
-    handleNextButtonToQuestion()
-    handleFinishWindow();
-}
+function handleNext() {
+        $('.windows').on('click', '.next', function () {
+            keepTrack()
+            console.log(i);
+            removeUnwantedCode()
+            if (i < 5) {
+            $('.windows').append(returnCode(STORE[i]));
+            }
+            else {
 
-$(handleQuizApp);
+            }
+        })
+    }
+
+
+    function handleQuizApp() {
+        renderStartWindow();
+        handleStart();
+        handelSubmit()
+        handleNumRemaing();
+        handleNumCorrect();
+        handleNext()
+    }
+
+    $(handleQuizApp);
