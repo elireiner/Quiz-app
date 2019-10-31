@@ -169,8 +169,8 @@ function returnEvalCode() {
                 <button>Next</button>`
     }
     else {
-        return `<p>Wrong!</p>
-        <p>the correct andwer is: ${returnCorrect(STORE[i])}.</p>
+        return `<p>This response was wrong...</p>
+        <p>The correct andwer is: "${returnCorrect(STORE[i])}".</p>
         <button>Next</button>`
     }
 };
