@@ -1,42 +1,75 @@
 * {
     box-sizing: border-box;
 }
+
+.windows {
+    padding: 15px;
+}
+
+.start{
+    margin-top: 15px;
+    padding: 20px;
+}
 .track {
     display: flex;
     margin-right: 5px;
     margin-left: 5px;
     justify-content: space-between;
 }
-.correct{
-    align-self: flex-start;
+* {
+    box-sizing: border-box;
 }
+user agent stylesheet
+div {
+    display: block;
+}
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+user agent stylesheet
+html {
+    color: -internal-root-color;
+}
+
+.thatIsCorrect {
+    text-align: center;
+}
+
 .remaining {
     align-self: flex-end;
 }
+
 h1 {
-    margin-top: 75px;
     text-align: center;
 }
+
 .start-button-div {
     display: flex;
     justify-content: center;
 }
-.button{
+
+button {
     font-size: 20px;
     width: 100%;
+    border: 1px solid black;
 }
+
 .form {
     text-align: start;
 }
+
 .fieldset {
     border: 0;
 }
+
 .submit-button {
     margin: auto;
     width: 100%;
     display: block;
     text-align: center;
 }
+
 .next-button {
     display: flex;
     justify-content: center;
@@ -50,18 +83,25 @@ h1 {
     flex-direction: column;
     align-items: center;
 }
-.response-correct, .wrong, .the-correct-asw {
+
+.response-correct,
+.wrong,
+.the-correct-asw {
     margin-top: 4px;
     margin-bottom: 4px;
 }
-.response-correct {
-    color: green;
+
+.notThat{
+    text-align: center;
 }
-.wrong {
-    color: red;
-}
+
 .final-window {
     display: flex;
-   flex-direction: column;
-   align-items: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    padding: 20px;
 }
+
+
+@media (min-width: 600px) {}

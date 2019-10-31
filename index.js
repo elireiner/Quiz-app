@@ -52,13 +52,36 @@ const STORE = [
 ];
 let i = 0;
 let h = 0;
+
+function handleCorrectStyle(){
+    let width = $('body').width();
+    if (width < 600 ){
+        return `<p class="correct small">Correct: ${h}/5</p>`
+    }
+   else {
+       return `<p class="correct large">You answered ${h}/5 questions correct.</p>`
+   }
+}
+
+function handleRemainingStyle(){
+    let width = $('body').width();
+    if (width < 600 ){
+        return `<p class="remaining">Question: ${i + 1}/5</p>`
+    }
+   else {
+       return `<p class="remaining">This is question ${i + 1}/5.</p>`
+   }
+}
+
 function renderStartWindow() {
     $('.windows').prepend(
-        `<header>
-            <h1 class="start-title">How much do you know about SpaceX?</h1>
-        </header>
-        <div class="start-button-div">
-        <button class="start-button">Start quiz</button>
+        `<div class="start">
+            <header>
+                <h1 class="start-title">How much do you know about SpaceX?</h1>
+            </header>
+            <div class="start-button-div">
+                <button class="start-button">Start quiz</button>
+            </div>
         </div>`);
 };
 
@@ -68,8 +91,7 @@ function removeUnwantedCode() {
 
 function returnCode(item) {
     return `<div class="track">
-                <p class="correct">You answered ${h}/5 questions correct.</p>
-                <p class="remaining">This is question ${i + 1}/5.</p>
+                ${handleCorrectStyle()}${handleRemainingStyle()}
             </div>
             <form class="form">
                 <fieldset class="fieldset">
@@ -107,13 +129,13 @@ function returnSelectedAnw() {
 function returnEvalCode() {
     if (returnSelectedAnw() === STORE[i].correct) {
         h++;
-        $('.correct').empty().append(`You answered ${h}/5 questions correct.`)
-        return `<p>Correct!</p>
+        $('.track').empty().append(handleCorrectStyle(), handleRemainingStyle())
+        return `<p class="thatIsCorrect">Correct!</p>
                 <button class="next">Next</button>`;
     }
     else {
-        return `<p>This response was wrong...</p>
-        <p>The correct answer is: "${STORE[i].correct}".</p>
+        return `<p class="notThat">That response was wrong...</p>
+        <p class="notThat">The correct answer is: "${STORE[i].correct}".</p>
         <button class="next">Next</button>`;
     }
 };
