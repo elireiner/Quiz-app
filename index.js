@@ -77,14 +77,25 @@ function keepTrack() {
     i++
 };
 
-function removeUnwantedCode(){
-    $('.windows').empty();
-};
 function resetTracker() {
     /*this function will reset the value of 'i' to 0*/
 
     i = 0;
     console.log(i);
+};
+
+function removeUnwantedCode() {
+    $('.windows').empty();
+};
+
+function handleNumCorrect() {
+    console.log(`'handleNumCorrect' ran`);
+    /* the function will tell the user how may questions they go correct so far*/
+};
+
+function handleNumRemaing() {
+    console.log(`'handleNumRemaing' ran`);
+    /* this function will let the user know how many question still remain*/
 };
 
 function returnCode(item) {
@@ -95,7 +106,7 @@ function returnCode(item) {
                 <p class="correct"></p>
                 <p class="remaining"></p>
             </div>
-            <form action="" class="form">
+            <form class="form">
                 <fieldset class="fieldset">
                     <legend class="question">${item.question}</legend>
                     <input type="radio" name="SpaceX" id="ans-1" value="0">
@@ -117,10 +128,8 @@ function returnCode(item) {
             </div>`;
 };
 
-
-
-function handleQuestionAnsRendering() {
-    console.log(`'handleQuestionsansRendering' ran`);
+function handleStart() {
+    console.log(`'handleStart' ran`);
     /*
     this function will dispay one question at a time with its answers
     the first question and its answers will be displayed when the user clicks the start button
@@ -133,34 +142,52 @@ function handleQuestionAnsRendering() {
     $('.body').on('click', '.start-button', function (event) {
         removeUnwantedCode()
         $('.windows').prepend(returnCode(STORE[i]));
-
-        keepTrack(); //this will increase 'i' by one and thereby insureing that this render is kept track of.
     });
 
 };
 
-function handleCorrect() {
-    console.log(`'handleCorrect' ran`);
-    /* this function should display the response for a correct answer
+function returnChecked() {
+    /*this function will return the answer that was selceted when the user clicks submit
+    
+    find the brodest div element, on click of the submit button run:
+        return: find answer selected, get its text
+    */
+   return $('input[name="SpaceX"]:checked', '.form').next().text();
+}
+
+function returnCorrect(item){
+    /*his function will retrn the correct answer*/
+    return item.correct;
+}
+
+function returnEvalCode() {
+    console.log(`'returnIfCorrect' ran`);
+    /* this function should return if the checked aswer if equel to the correct aswer.
     to do so, this function will compare the answer clicked on and submitted with the correct answer*/
+    if (returnChecked() === returnCorrect(STORE[i])){
+        return `<p>Correct!</p>
+                <button>Next</button>`
+    }
+    else {
+        return `<p>Wrong!</p>
+        <p>the correct andwer is: ${returnCorrect(STORE[i])}.</p>
+        <button>Next</button>`
+    }
 };
 
-function handleWrong() {
-    console.log(`'handleWrong' ran`);
-    /* this function should display the response for a wrong answer
-    to do so, this function will compare the answer clicked on and submitted with the correct answer */
-};
+function handelSubmit() {
+    $('.body').on('click', '.submit', function () {
+        $('.submit-button').remove();
+        /* call a function that will return whether answer correct and next button
+        */
+       $('.windows').append(returnEvalCode());
+    });
+}
 
-function handleNumRemaing() {
-    console.log(`'handleNumRemaing' ran`);
-    /* this function will let the user know how many question still remain*/
-};
-
-function handleNumCorrect() {
-    console.log(`'handleNumCorrect' ran`);
-    /* the function will tell the user how may questions they go correct so far*/
-};
-
+function handleNextButtonToQuestion() {
+    /* this function will return the next question*/
+    //keepTrack()
+}
 function handleFinishWindow() {
     console.log(`'handleFinishWindow' ran`);
     /* after the last question was submitted, when the user clicks next, this function will display
@@ -169,11 +196,11 @@ function handleFinishWindow() {
 
 function handleQuizApp() {
     renderStartWindow();
-    handleQuestionAnsRendering();
+    handleStart();
+    handelSubmit()
     handleNumRemaing();
     handleNumCorrect();
-    handleCorrect();
-    handleWrong();
+    handleNextButtonToQuestion()
     handleFinishWindow();
 }
 
