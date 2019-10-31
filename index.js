@@ -128,8 +128,6 @@ function returnCode(item) {
             </div>`;
 };
 
-
-
 function handleStart() {
     console.log(`'handleStart' ran`);
     /*
@@ -180,8 +178,6 @@ function returnEvalCode() {
 function handelSubmit() {
     $('.body').on('click', '.submit', function () {
         $('.submit-button').remove();
-        /* call a function that will return whether answer correct and next button
-        */
         $('.windows').append(returnEvalCode());
     });
 }
@@ -201,19 +197,25 @@ function handleNext() {
             $('.windows').append(returnCode(STORE[i]));
             }
             else {
-
+                $('.windows').append(`<div class="final-window">
+                                        <p>Your SpaceX IQ score is: ${5/5}</p>
+                                        <button class="retake">Retake</button>
+                                    </div`)
             }
         })
     }
 
+function handleRetake(){
 
+}
     function handleQuizApp() {
         renderStartWindow();
         handleStart();
-        handelSubmit()
+        handelSubmit();
         handleNumRemaing();
         handleNumCorrect();
-        handleNext()
+        handleNext();
+        handleRetake();
     }
 
     $(handleQuizApp);
