@@ -49,7 +49,7 @@ const STORE = [
         answer4: 'In June 2009',
         correct: 'In December 2013.'
     }
-]
+];
 let i = 0;
 let h = 0;
 function renderStartWindow() {
@@ -95,77 +95,74 @@ function returnCode(item) {
 
 function handleStart() {
     $('.body').on('click', '.start-button', function (event) {
-        removeUnwantedCode()
+        removeUnwantedCode();
         $('.windows').append(returnCode(STORE[i]));
     });
 };
 
-function returnChecked() {
+function returnSelectedAnw() {
     return $('input[name="SpaceX"]:checked', '.form').next().text();
-}
-
-function returnCorrect(item) {
-    return item.correct;
-}
+};
 
 function returnEvalCode() {
-    if (returnChecked() === returnCorrect(STORE[i])) {
+    if (returnSelectedAnw() === STORE[i].correct) {
         h++;
         $('.correct').empty().append(`You answered ${h}/5 questions correct.`)
         return `<p>Correct!</p>
-                <button class="next">Next</button>`
+                <button class="next">Next</button>`;
     }
     else {
         return `<p>This response was wrong...</p>
-        <p>The correct answer is: "${returnCorrect(STORE[i])}".</p>
-        <button class="next">Next</button>`
+        <p>The correct answer is: "${STORE[i].correct}".</p>
+        <button class="next">Next</button>`;
     }
 };
 
 function handelSubmit() {
     $('.body').on('click', '.submit', function () {
-        if ($(`.form input[type="radio"]:checked`).length){
+        if ($(`.form input[type="radio"]:checked`).length) {
             $('.submit-button').remove();
             $('.windows').append(returnEvalCode());
         }
         else {
             $('.submit-button').empty().append(`<button type="submit" class="submit">Submit</button>
-                                                <p>Please select an answer.</p>`)
+                                                <p>Please select an answer.</p>`);
         }
     });
-}
+};
 
 function handleNext() {
-        $('.windows').on('click', '.next', function () {
-            i++;
-            removeUnwantedCode()
-            if (i < 5) {
+    $('.windows').on('click', '.next', function () {
+        i++;
+        removeUnwantedCode();
+        if (i < 5) {
             $('.windows').append(returnCode(STORE[i]));
-            }
-            else {
-                $('.windows').append(`<div class="final-window">
+        }
+        else {
+            $('.windows').append(`<div class="final-window">
                                         <p>Your SpaceX IQ score is: ${h}/5</p>
                                         <button class="retake">Retake</button>
-                                    </div`)
-            }
-        })
-    }
+                                    </div`);
+        }
+    })
+};
 
-function handleRetake(){
-    $('.windows').on('click', '.retake', function (){
-        removeUnwantedCode()
+function handleRetake() {
+    $('.windows').on('click', '.retake', function () {
+        removeUnwantedCode();
         i = 0;
         h = 0;
         $('.windows').append(returnCode(STORE[i]));
 
     })
-}
-    function handleQuizApp() {
-        renderStartWindow();
-        handleStart();
-        handelSubmit();
-        handleNext();
-        handleRetake();
-    }
+};
 
-    $(handleQuizApp);
+function handleQuizApp() {
+    renderStartWindow();
+    handleStart();
+    handelSubmit();
+    handleNext();
+    handleRetake();
+};
+
+$(handleQuizApp);
