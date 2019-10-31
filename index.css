@@ -17,7 +17,7 @@ h1 {
     margin-top: 75px;
     text-align: center;
 }
-.start-button {
+.start-button-div {
     display: flex;
     justify-content: center;
 }
