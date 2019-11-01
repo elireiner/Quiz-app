@@ -56,6 +56,7 @@ let h = 0;
 function handleCorrectStyle(){
     let width = $('body').width();
     if (width < 600 ){
+        console.log("width", width);
         return `<p class="correct small">Correct: ${h}/5</p>`
     }
    else {
