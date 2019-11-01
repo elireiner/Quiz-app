@@ -163,7 +163,7 @@ function handleNext() {
         }
         else {
             $('.windows').append(`<div class="final-window">
-                                        <p>Your SpaceX IQ score is: ${h}/5</p>
+                                        <p class="score">Your SpaceX IQ score is: ${h}/5</p>
                                         <button class="retake">Retake</button>
                                     </div`);
         }

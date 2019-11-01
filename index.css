@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-size: 20px;
 }
 
 .windows {
@@ -102,9 +103,17 @@ button {
     margin-top: 15px;
     padding: 20px;
 }
+.score{
+    font-size: 32px;
+    text-align: center;
+
+}
 
 
 @media (min-width: 600px) {
+    * {
+        font-size: 20px;
+    }
     .windows{
         display: flex;
         flex-direction: column;
@@ -120,6 +129,9 @@ button {
 }
 
 @media (min-width: 1000px){
+    * {
+        font-size: 22px;
+    }
     .windows{
         display: flex;
         flex-direction: column;
